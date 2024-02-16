@@ -18,7 +18,7 @@ public class AsterixService {
         return characterRepo.findAll();
     }
 
-    List<Character> findByName(String name) {
+    List<Character> findByName(String name){
         return characterRepo.findByName(name);
     }
 
@@ -44,9 +44,14 @@ public class AsterixService {
         Character newCharacter = new Character(idService.randomId(), newCharacterDto.getName(), newCharacterDto.getAge(), newCharacterDto.getProfession());
         return characterRepo.save(newCharacter);
     }
+    public Character update(Character updatedCharacter) {
+        return characterRepo.save(updatedCharacter);
+    }
 
     public String deleteById(String id) {
         characterRepo.deleteById(id);
         return "Character with ID "+id+" deleted.";
     }
+
+
 }

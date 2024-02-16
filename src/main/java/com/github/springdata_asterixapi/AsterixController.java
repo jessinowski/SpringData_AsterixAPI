@@ -39,12 +39,12 @@ public class AsterixController {
         return service.findById(id);
     }
 
-//    @GetMapping("/age")
-//    public List<Character> getCharacterByAge(@RequestParam int age) {
-//        return service.findByAge(age);
-//    }
+    @GetMapping("/{age}")
+    public List<Character> getCharacterByAge(@PathVariable int age) {
+        return service.findByAge(age);
+    }
 
-//    @GetMapping("/age")
+    //    @GetMapping("/age")
 //    public List<Character> filterCharacterByMaximumAge(@RequestParam int age){
 //        return service.findByMaximumAge(age);
 //    }
@@ -64,7 +64,7 @@ public class AsterixController {
                 .mapToInt(character -> character.age())
                 .sum();
 
-        return sum/charactersByProfession.size();
+        return sum / charactersByProfession.size();
     }
 
     @PostMapping("/create")
@@ -73,14 +73,19 @@ public class AsterixController {
     }
 
     @PutMapping("/update/{id}")
-    public Character updateCharacterById(@PathVariable String id, @RequestBody CharacterDto updatedCharacter) {
-        return service.save(updatedCharacter);
+    public Character updateCharacterById(@PathVariable String id, @RequestBody Character updatedCharacter) {
+        updatedCharacter = updatedCharacter.withId(id);
+        service.update(updatedCharacter);
+        return updatedCharacter;
     }
 
-    @PutMapping("/update/{name}")
-    public Character updateCharacterByName(@PathVariable String name, @RequestBody CharacterDto updatedCharacter) {
-        return service.save(updatedCharacter);
-    }
+//    @PutMapping("/update/{name}")
+//    public Character updateCharacterByName(@PathVariable String name, @RequestBody Character updatedCharacter) {
+//        updatedCharacter = updatedCharacter.withName(name);
+//        service.update(updatedCharacter);
+//        return updatedCharacter;
+//    }
+
 
     @DeleteMapping("/delete/{id}")
     public String deleteCharacterById(@PathVariable String id) {
