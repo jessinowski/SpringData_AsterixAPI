@@ -11,11 +11,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AsterixController {
 
-    private final CharacterRepo characterRepo;
+    private final AsterixService service;
 
     @GetMapping
     public List<Character> getAllCharacters() {
-        return characterRepo.findAll();
+        return service.getAllCharacters();
         //        return List.of(
 //                new Character("1", "Asterix", 35, "Krieger"),
 //                new Character("2", "Obelix", 35, "Lieferant"),
@@ -31,28 +31,28 @@ public class AsterixController {
 
     @GetMapping("/{name}")
     public List<Character> getCharacterByName(@PathVariable String name) {
-        return characterRepo.findByName(name);
+        return service.findByName(name);
     }
 
     @GetMapping("/{id}")
     public Optional<Character> getCharacterById(@PathVariable String id) {
-        return characterRepo.findById(id);
+        return service.findById(id);
     }
 
     @GetMapping("/{age}")
     public List<Character> getCharacterByAge(@PathVariable int age) {
-        return characterRepo.findByAge(age);
+        return service.findByAge(age);
     }
 
     @GetMapping("/{profession}")
     public List<Character> getCharacterByProfession(@PathVariable String profession) {
-        return characterRepo.findByProfession(profession);
+        return service.findByProfession(profession);
     }
 
     @GetMapping("/averageAge/{profession}")
     public double getAverageAgeByProfession(@PathVariable String profession) {
 
-        List<Character> charactersByProfession = characterRepo.findAll().stream()
+        List<Character> charactersByProfession = service.getAllCharacters().stream()
                 .filter(character -> character.profession().equals(profession))
                 .toList();
 
@@ -64,23 +64,23 @@ public class AsterixController {
     }
 
     @PostMapping("/create")
-    public Character saveCharacter(@RequestBody Character newCharacter) {
-        return characterRepo.save(newCharacter);
+    public Character saveCharacter(@RequestBody CharacterDto newCharacter) {
+        return service.save(newCharacter);
     }
 
     @PutMapping("/update/{id}")
-    public Character updateCharacterById(@PathVariable String id, @RequestBody Character updatedCharacter) {
-        return characterRepo.save(updatedCharacter);
+    public Character updateCharacterById(@PathVariable String id, @RequestBody CharacterDto updatedCharacter) {
+        return service.save(updatedCharacter);
     }
 
     @PutMapping("/update/{name}")
-    public Character updateCharacterByName(@PathVariable String name, @RequestBody Character updatedCharacter) {
-        return characterRepo.save(updatedCharacter);
+    public Character updateCharacterByName(@PathVariable String name, @RequestBody CharacterDto updatedCharacter) {
+        return service.save(updatedCharacter);
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteCharacterById(@PathVariable String id) {
-        characterRepo.deleteById(id);
+        service.deleteById(id);
         return "Character with ID: " + id + " deleted.";
     }
 

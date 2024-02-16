@@ -8,4 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CharacterDto {
+
+    private String name;
+    private int age;
+    private String profession;
 }

@@ -9,9 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface CharacterRepo extends MongoRepository<Character, String> {
+
    List<Character> findByName(String name);
-
    List<Character> findByAge(int age);
-
    List<Character> findByProfession(String profession);
 }
