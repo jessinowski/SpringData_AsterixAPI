@@ -39,11 +39,15 @@ public class AsterixController {
         return service.findById(id);
     }
 
-    @GetMapping("/{age}")
-    public List<Character> getCharacterByAge(@PathVariable int age) {
-        return service.findByAge(age);
-    }
+//    @GetMapping("/age")
+//    public List<Character> getCharacterByAge(@RequestParam int age) {
+//        return service.findByAge(age);
+//    }
 
+//    @GetMapping("/age")
+//    public List<Character> filterCharacterByMaximumAge(@RequestParam int age){
+//        return service.findByMaximumAge(age);
+//    }
     @GetMapping("/{profession}")
     public List<Character> getCharacterByProfession(@PathVariable String profession) {
         return service.findByProfession(profession);

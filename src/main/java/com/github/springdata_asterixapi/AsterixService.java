@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class AsterixService {
     private final CharacterRepo characterRepo;
-    private IdService idService;
+    private final IdService idService;
 
     public List<Character> getAllCharacters(){
         return characterRepo.findAll();
@@ -24,6 +24,12 @@ public class AsterixService {
 
     List<Character> findByAge(int age) {
         return characterRepo.findByAge(age);
+    }
+
+    List<Character> findByMaximumAge(int age){
+        return characterRepo.findAll().stream()
+                .filter(character -> character.age()<=age)
+                .toList();
     }
 
     List<Character> findByProfession(String profession) {
