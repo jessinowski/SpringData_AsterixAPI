@@ -45,7 +45,8 @@ public class AsterixService {
         return characterRepo.save(newCharacter);
     }
 
-    public void deleteById(String id) {
+    public String deleteById(String id) {
         characterRepo.deleteById(id);
+        return "Character with ID "+id+" deleted.";
     }
 }
