@@ -54,4 +54,12 @@ public class AsterixService {
     }
 
 
+    public List<Character> filterCharacter(String id, String name, int age, String profession) {
+        return characterRepo.findAll().stream()
+                .filter(character -> character.id().equals(id) ||
+                        character.name().equals(name) ||
+                        character.age() == age ||
+                        character.profession().equals(profession))
+                .toList();
+    }
 }

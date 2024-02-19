@@ -3,6 +3,7 @@ package com.github.springdata_asterixapi;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.DocFlavor;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,15 @@ public class AsterixController {
 //                new Character("8", "Geriatrix", 70, "Rentner"),
 //                new Character("9", "Automatix", 35, "Schmied"),
 //                new Character("10", "Grockelix", 35, "Fischer")
+    }
+
+    // weiter bearbeieten
+    @GetMapping("/filter")
+    public List<Character> filterCharacter(@RequestParam(required = false) String id,
+                                           @RequestParam(required = false) String name,
+                                           @RequestParam(required = false) int age,
+                                           @RequestParam(required = false) String profession){
+        return service.filterCharacter(id, name, age, profession);
     }
 
     @GetMapping("/{name}")
@@ -78,14 +88,6 @@ public class AsterixController {
         service.update(updatedCharacter);
         return updatedCharacter;
     }
-
-//    @PutMapping("/update/{name}")
-//    public Character updateCharacterByName(@PathVariable String name, @RequestBody Character updatedCharacter) {
-//        updatedCharacter = updatedCharacter.withName(name);
-//        service.update(updatedCharacter);
-//        return updatedCharacter;
-//    }
-
 
     @DeleteMapping("/delete/{id}")
     public String deleteCharacterById(@PathVariable String id) {
